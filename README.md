@@ -21,11 +21,23 @@ npm run build
 npm run lint
 ```
 
+自动修复大部分 ESLint 问题：
+
+```bash
+npm run lint:fix
+```
+
+一键执行正式 CI 校验：
+
+```bash
+npm run check
+```
+
 ## 已包含的流程
 
-- 推送到 `main` 分支时，自动安装依赖、执行 ESLint 并构建项目
-- 构建成功后，自动发布到 `GitHub Pages`
-- 提交 `Pull Request` 到 `main` 时，会先执行构建校验，但不会正式部署
+- `Frontend CI`：在 `push main`、`Pull Request`、手动触发时执行 `ESLint + build`
+- `Deploy Vite app to GitHub Pages`：在 `push main` 或手动触发时发布到 `GitHub Pages`
+- 部署工作流里也会先执行校验，确保不会把未通过检查的代码发到线上
 
 ## 第一次推到 GitHub
 
@@ -48,10 +60,8 @@ git push -u origin main
 
 之后每次你往 `main` 分支推送代码，GitHub 都会自动执行：
 
-1. 安装依赖
-2. 执行 ESLint
-3. 构建项目
-4. 发布到 Pages
+1. `Frontend CI` 先跑 ESLint 和构建校验
+2. `Deploy Vite app to GitHub Pages` 再执行检查并发布到 Pages
 
 部署成功后，访问地址通常是：
 
@@ -65,3 +75,9 @@ git push -u origin main
 - 在 GitHub Actions 中构建时，会自动把 `base` 切换为 `/<仓库名>/`
 
 这样你不需要每次换仓库名都手动改配置。
+
+## 推荐你继续练的真实团队用法
+
+- 提交代码前先在本地执行 `npm run check`
+- 发起 `Pull Request` 时观察 `Frontend CI` 是否通过
+- 在仓库的 `Settings -> Branches` 里给 `main` 开启保护规则，并要求 `Frontend CI` 必须通过后才能合并
