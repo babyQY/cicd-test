@@ -15,9 +15,15 @@ npm run dev
 npm run build
 ```
 
+本地执行 ESLint：
+
+```bash
+npm run lint
+```
+
 ## 已包含的流程
 
-- 推送到 `main` 分支时，自动安装依赖并构建项目
+- 推送到 `main` 分支时，自动安装依赖、执行 ESLint 并构建项目
 - 构建成功后，自动发布到 `GitHub Pages`
 - 提交 `Pull Request` 到 `main` 时，会先执行构建校验，但不会正式部署
 
@@ -43,8 +49,9 @@ git push -u origin main
 之后每次你往 `main` 分支推送代码，GitHub 都会自动执行：
 
 1. 安装依赖
-2. 构建项目
-3. 发布到 Pages
+2. 执行 ESLint
+3. 构建项目
+4. 发布到 Pages
 
 部署成功后，访问地址通常是：
 
