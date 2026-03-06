@@ -1,4 +1,6 @@
 <script setup>
+const unusedValue = 123
+console.log(unusedValue)
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
