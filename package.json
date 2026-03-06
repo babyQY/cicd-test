@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:staged": "lint-staged",
     "check": "npm run lint && npm run build",
+    "prepare": "husky",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -20,6 +22,11 @@
     "eslint": "^10.0.2",
     "eslint-plugin-vue": "^10.8.0",
     "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.2",
     "vite": "^7.3.1"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,vue}": "eslint --fix"
   }
 }

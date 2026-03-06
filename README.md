@@ -33,11 +33,18 @@ npm run lint:fix
 npm run check
 ```
 
+本地提交前自动检查已启用：
+
+- `git commit` 时会通过 `husky + lint-staged` 自动检查已暂存的 `js/vue` 文件
+- 检查命令会对这些文件执行 `eslint --fix`
+- 如果还有无法自动修复的错误，提交会被阻止
+
 ## 已包含的流程
 
 - `Frontend CI`：在 `push main`、`Pull Request`、手动触发时执行 `ESLint + build`
 - `Deploy Vite app to GitHub Pages`：在 `push main` 或手动触发时发布到 `GitHub Pages`
 - 部署工作流里也会先执行校验，确保不会把未通过检查的代码发到线上
+- `pre-commit`：在本地提交前优先拦截明显的 ESLint 问题
 
 ## 第一次推到 GitHub
 
@@ -78,6 +85,7 @@ git push -u origin main
 
 ## 推荐你继续练的真实团队用法
 
+- 改完代码先 `git add`，再 `git commit`，让 `pre-commit` 自动先检查本次暂存内容
 - 提交代码前先在本地执行 `npm run check`
 - 发起 `Pull Request` 时观察 `Frontend CI` 是否通过
 - 在仓库的 `Settings -> Branches` 里给 `main` 开启保护规则，并要求 `Frontend CI` 必须通过后才能合并
